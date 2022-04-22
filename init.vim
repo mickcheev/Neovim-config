@@ -1,5 +1,4 @@
-set mouse=a  " enable mouse
-set encoding=utf-8
+set mouse=a  " enable mouse set encoding=utf-8
 set number
 set noswapfile
 set scrolloff=7
@@ -9,8 +8,9 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 set autoindent
-set fileformat=unix
 filetype indent on      " load filetype-specific indent files
+
+inoremap jk <esc>
 
 
 call plug#begin('~/.vim/plugged')
@@ -20,7 +20,7 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'L3MON4D3/LuaSnip'
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 "Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
@@ -53,15 +53,12 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 "           darker-community
 "let g:material_theme_style = 'darker'
 "colorscheme material
-if (has('termguicolors'))
-  set termguicolors
-endif
 
 " variants: mirage, dark, dark
+"let ayucolor="mirage"
 colorscheme ayu
 
 
-let ayucolor="dark"
 
 " turn off search highlight
 nnoremap ,<space> :nohlsearch<CR>
@@ -150,7 +147,7 @@ local on_attach = function(client, bufnr)
   -- Mappings.
   local opts = { noremap=true, silent=true }
 
-  -- See `:help vim.lsp.*` for documentation on any of the belowfunctions
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
@@ -264,10 +261,8 @@ map gn :bn<cr>
 map gp :bp<cr>
 map gw :Bclose<cr>
 
-set colorcolumn=79
 
 " run current script with python3 by CTRL+R in command and insert mode
 autocmd FileType python map <buffer> <C-r> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType python imap <buffer> <C-r> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>(
 
- 
